@@ -41,6 +41,8 @@ class _MoviePageState extends State<MoviePage> {
   final List<String> _title = <String>[];
   final List<String> _img = <String>[];
   final List<int> _years = <int>[];
+  final List<int> _run = <int>[];
+  final List<String> _datee = <String>[];
 
   void _getMovie() {
     get(Uri.parse('https://yts.mx/api/v2/list_movies.json')).then((Response response) {
@@ -54,6 +56,8 @@ class _MoviePageState extends State<MoviePage> {
         _title.addAll(movies.map((dynamic item) => item['title'] as String));
         _img.addAll(movies.map((dynamic item) => item["medium_cover_image"] as String));
         _years.addAll(movies.map((dynamic item) => item['year'] as int));
+        _run.addAll(movies.map((dynamic item) => item["runtime"] as int));
+        _datee.addAll(movies.map((dynamic item) => item["date_uploaded"] as String));
 
         isLoading = false;
       });
@@ -79,9 +83,11 @@ class _MoviePageState extends State<MoviePage> {
                 final String title = _title[index];
                 final String img = _img[index];
                 final int years = _years[index];
+                final int run = _run[index];
+                final String datee = _datee[index];
 
                 return Padding(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
 
@@ -93,15 +99,17 @@ class _MoviePageState extends State<MoviePage> {
                           TextButton(child: Text('Comming Soon'), onPressed: () {}),
                         ],
                       ),
+
                       Container(
-                        width: MediaQuery.of(context).size.width / 1.2,
-                        height: MediaQuery.of(context).size.height / 1.7,
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        height: MediaQuery.of(context).size.height / 1.8,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           image: DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
                         ),
                         alignment: Alignment.center,
                       ),
+
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8),
@@ -116,7 +124,7 @@ class _MoviePageState extends State<MoviePage> {
                                     ),
                                     onPressed: () {}),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     ElevatedButton(
                                         child: Column(
@@ -129,22 +137,23 @@ class _MoviePageState extends State<MoviePage> {
                                     ElevatedButton(
                                         child: Column(
                                           children: [
-                                            Text('Rating'),
-                                            Text('4444'),
+                                            Text('Runtime'),
+                                            Text('$run'),
                                           ],
                                         ),
                                         onPressed: () {}),
-                                    ElevatedButton(
-                                        child: Column(
-                                          children: [
-                                            Text('Anul '),
-                                            Text('$years'),
-                                          ],
-                                        ),
-                                        onPressed: () {}),
+
                                   ],
-                                )
+                                ),ElevatedButton(
+                            child: Column(
+                              children: [
+                                Text('Incarcare pe platforma',maxLines: 2,),
+                                Text(datee),
                               ],
+                            ),
+                            onPressed: () {}),
+                              ],
+
                             ),
                           ),
                         ),
