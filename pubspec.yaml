@@ -1,5 +1,6 @@
 name: movie_tema_2
-description: The user has to guess the apps chosen number
+description: Flutter app, gets movie info from site
+
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -8,15 +9,16 @@ environment:
   sdk: '>=2.18.4 <3.0.0'
 
 dependencies:
-  cupertino_icons: ^1.0.2
-  http: ^0.13.5
   flutter:
     sdk: flutter
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: ^3.1.0
 
+
 flutter:
+
   uses-material-design: true
